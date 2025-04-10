@@ -51,10 +51,10 @@ public class UserMapperTest {
         mockUser2.setId(8921l);
         mockUser2.setName("张四");
         mockUser2.setCountry("444");
-        when(userMapper.selectUserById(8911l)).thenReturn(mockUser1);
-        when(userMapper.selectUserById(8921l)).thenReturn(mockUser2);
-        User user1 = userMapper.selectUserById(8911l); // 查询 ds1.t_user_1
-        User user2 = userMapper.selectUserById(8921l); // 查询 ds0.t_user_0
+        when(userMapper.selectByPrimaryKey(8911l)).thenReturn(mockUser1);
+        when(userMapper.selectByPrimaryKey(8921l)).thenReturn(mockUser2);
+        User user1 = userMapper.selectByPrimaryKey(8911l); // 查询 ds1.t_user_1
+        User user2 = userMapper.selectByPrimaryKey(8921l); // 查询 ds0.t_user
         System.out.println("查询到的用户1：" + user1.toString());
         System.out.println("查询到的用户2：" + user2.toString());
 

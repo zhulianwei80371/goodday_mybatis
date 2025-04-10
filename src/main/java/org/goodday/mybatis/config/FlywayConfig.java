@@ -13,7 +13,7 @@ public class FlywayConfig {
     @Bean(name = "flywayPrimary")
     public Flyway flywayPrimary() {
         return Flyway.configure()
-                .dataSource("jdbc:mysql://192.168.253.129:3306/insound1?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true", "insound", "123456")
+                .dataSource("jdbc:mysql://192.168.1.48:3306/insound1?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true", "insound", "123456")
                 .locations("classpath:db/migration/insound1")
                 .baselineOnMigrate(true)
                 .load();
@@ -22,7 +22,7 @@ public class FlywayConfig {
     @Bean(name = "flywaySecondary")
     public Flyway flywaySecondary() {
         return Flyway.configure()
-                .dataSource("jdbc:mysql://192.168.253.129:3306/insound2?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true", "insound", "123456")
+                .dataSource("jdbc:mysql://192.168.1.48:3306/insound2?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true", "insound", "123456")
                 .locations("classpath:db/migration/insound2")
                 .baselineOnMigrate(true)
                 .load();

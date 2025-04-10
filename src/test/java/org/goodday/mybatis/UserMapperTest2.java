@@ -24,8 +24,8 @@ public class UserMapperTest2 {
         mockUser2.setName("张四");
         mockUser2.setCountry("444");
 
-        userMapper.insertUser(mockUser1); // 插入到 ds1.t_user_1
-        userMapper.insertUser(mockUser2); // 插入到 ds0.t_user_0
+        userMapper.insert(mockUser1); // 插入到 ds1.t_user_1
+        userMapper.insert(mockUser2); // 插入到 ds0.t_user
         System.out.println("用户插入成功！");
     }
 

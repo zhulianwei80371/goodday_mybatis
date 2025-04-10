@@ -11,12 +11,12 @@ public class UserService {
     private UserMapper userMapper;
 
     public User selectUserById(Long id) {
-        return userMapper.selectUserById(id );
+        return userMapper.selectByPrimaryKey(id );
 
     }
 
     public String insertUser(User user) {
-        userMapper.insertUser(user);
+        userMapper.insert(user);
         return "用户添加成功";
     }
 }
