@@ -4,6 +4,7 @@ package org.goodday.mybatis;
 //import org.flywaydb.core.api.configuration.FluentConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.flywaydb.core.Flyway;
+import org.goodday.mybatis.config.CountryMapConfig;
 import org.goodday.mybatis.controller.UserController;
 import org.goodday.mybatis.entity.User;
 import org.goodday.mybatis.mapper.UserMapper;
@@ -26,7 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
-@Import(UserService.class)// 加上真实 Service
+@Import({UserService.class, CountryMapConfig.class})// 加上真实 Service
 public class UserMapperTest {
 
     @MockBean

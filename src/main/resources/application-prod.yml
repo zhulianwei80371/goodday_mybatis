@@ -144,26 +144,60 @@
 #            type: INLINE
 #            props:
 #              algorithm-expression: t_user_$->{country.hashCode() % 2}
-
-
-#logging:
-#  level:
-#    com.shardingsphere: DEBUG
-
-
-# application.yml
+logging:
+  level:
+    com.shardingsphere: DEBUG
 spring:
-  profiles:
-    active: dev   # 或 test、prod
-
-goodday:
-  country-map:
-    china: 中国
-    america: 美国
-  cities:
-    - 上海
-    - 北京
-    - 广州
-    - 深圳
-    - 成都
-    - 杭州
+  flyway:
+    enabled: false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.253.129:3306/insound?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    user: insound
+    password: 123456
+    locations: classpath:db/migration/insound1
+  flyway-secondary:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    enabled: false
+    url: jdbc:mysql://192.168.253.129:3306/insound2?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    user: insound
+    password: 123456
+    locations: classpath:db/migration/insound2
+  shardingsphere:
+    mode:
+      type: Standalone
+    datasource:
+      names: ds0, ds1
+      ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.253.129:3306/insound1?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+        username: insound
+        password: 123456
+      ds1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.253.129:3306/insound2?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+        username: insound
+        password: 123456
+    rules:
+      sharding:
+        tables:
+          t_user:
+            actual-data-nodes: ds$->{0..1}.t_user_$->{0..1}
+            table-strategy:
+              standard:
+                sharding-column: country
+                sharding-algorithm-name: table-inline
+            database-strategy:
+              standard:
+                sharding-column: country
+                sharding-algorithm-name: db-inline
+        sharding-algorithms:
+          db-inline:
+            type: INLINE
+            props:
+              algorithm-expression: ds$->{country.hashCode() % 2}
+          table-inline:
+            type: INLINE
+            props:
+              algorithm-expression: t_user_$->{country.hashCode() % 2}

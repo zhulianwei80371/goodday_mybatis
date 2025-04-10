@@ -16,11 +16,11 @@ public class UserMapperTest2 {
     @Test
     public void testInsertUser() {
         User mockUser1 = new User();
-        mockUser1.setId(891111L);
+        mockUser1.setId(12891111L);
         mockUser1.setName("张三");
         mockUser1.setCountry("333");
         User mockUser2 = new User();
-        mockUser2.setId(892111l);
+        mockUser2.setId(13892111l);
         mockUser2.setName("张四");
         mockUser2.setCountry("444");
 
