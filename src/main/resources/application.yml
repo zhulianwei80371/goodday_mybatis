@@ -144,7 +144,9 @@
 #            type: INLINE
 #            props:
 #              algorithm-expression: t_user_$->{country.hashCode() % 2}
-
+logging:
+  level:
+    com.shardingsphere: DEBUG
 spring:
   flyway:
     enabled: false

@@ -94,4 +94,20 @@ public class User {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    // 打印所有内容的拼接串
+    @Override
+    public String toString() {
+        // 打印所有字段
+        return "User{" +
+                        "id=" + id +
+                        ", name='" + name + '\'' +
+                        ", region='" + region + '\'' +
+                        ", sex='" + sex + '\'' +
+                        ", age='" + age + '\'' +
+                        ", nation='" + nation + '\'' +
+                        ", province='" + province + '\'' +
+                        ", country='" + country + '\'' +
+                        '}';
+    }
 }
