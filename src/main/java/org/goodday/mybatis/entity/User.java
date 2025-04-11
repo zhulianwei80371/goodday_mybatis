@@ -99,4 +99,14 @@ public class User {
     public void setCountry(String country) {
         this.country = country == null ? null : country.trim();
     }
+
+    // 打印所有字段拼接串
+    @Override
+    public  String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
 }

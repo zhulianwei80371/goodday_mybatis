@@ -16,7 +16,12 @@ public class UserService {
     }
 
     public String insertUser(User user) {
-        userMapper.insert(user);
+        try {
+            userMapper.insert(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            return "用户添加失败";
+        }
         return "用户添加成功";
     }
 }

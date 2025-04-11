@@ -12,7 +12,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import javax.sql.DataSource;
 
 @SpringBootApplication
-@MapperScan("org.goodday.mybatis.mapper")
+@MapperScan(basePackages = "org.goodday.mybatis.mapper")
 public class Main {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);

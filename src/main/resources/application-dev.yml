@@ -147,6 +147,9 @@
 logging:
   level:
     com.shardingsphere: DEBUG
+    org:
+      springframework:
+        web: DEBUG
 spring:
   flyway:
     enabled: false
