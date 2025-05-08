@@ -19,4 +19,3 @@ CREATE TABLE t_user_2 (
     country VARCHAR(255),
     PRIMARY KEY (id)
 );
-

@@ -10,15 +10,16 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.cloud.version>3.0.3</spring.cloud.version>
+        <alibaba.cloud.version>2021.0.5</alibaba.cloud.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.10</version> <!-- 根据需要选择合适的版本 -->
-        <relativePath/> <!-- 可选，表示不使用本地父 POM -->
+        <version>2.7.18</version>
     </parent>
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.5.10</version>
@@ -37,6 +38,10 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>5.3.10</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -46,7 +51,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.1</version>
+            <version>3.5.12</version>
         </dependency>
         <dependency>
             <groupId>org.apache.velocity</groupId>
@@ -56,12 +61,11 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-extension</artifactId>
-            <version>3.5.1</version>
+            <version>3.5.12</version>
         </dependency>
         <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-test</artifactId>
-        <version>2.5.10</version> <!-- 根据你的 Spring Boot 版本选择对应的版本 -->
         <scope>test</scope>
     </dependency>
         <!-- ShardingSphere Starter -->
@@ -81,11 +85,11 @@
             <version>1.33</version>
         </dependency>
         <!-- HikariCP 数据源连接池 -->
-        <dependency>
+        <!--dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <version>5.0.1</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -112,22 +116,13 @@
             <artifactId>shardingsphere-memory-mode-core</artifactId>
             <version>5.1.2</version>
         </dependency>
-
-        <!-- MyBatis 主模块 -->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-
-        <!-- MyBatis 测试模块 -->
+        <!--&lt;!&ndash; MyBatis 测试模块 &ndash;&gt;
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter-test</artifactId>
-            <version>2.3.1</version>
+            <version>2.3.1</version> &lt;!&ndash; 与 mybatis 3.5.13 兼容 &ndash;&gt;
             <scope>test</scope>
-        </dependency>
-
+        </dependency>-->
         <!-- Spring Boot 通用测试工具 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -144,7 +139,77 @@
             <artifactId>mybatis-generator-core</artifactId>
             <version>1.4.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>4.11.0</version> <!-- 根据需要选择合适的版本 -->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>4.11.0</version> <!-- 用于支持 JUnit 5 -->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.14.6</version> <!-- 确保版本与 Mockito 兼容 -->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>1.14.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            <version>${spring.cloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version> <!-- 或其他最新版本 -->
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.5.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.32</version>
+        </dependency>
+        <!-- SpringDoc OpenAPI 1.x for Spring Boot 2 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.7.0</version> <!-- 推荐最新 1.x 稳定版本 -->
+        </dependency>
+        <!--<dependency>
+            <groupId>org.mybatis.dynamic-sql</groupId>
+            <artifactId>mybatis-dynamic-sql</artifactId>
+            <version>1.4.1</version> &lt;!&ndash; 建议使用与 MBG 1.4.1 兼容的版本 &ndash;&gt;
+        </dependency>-->
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2021.0.6</version> <!-- ✅ Spring Cloud 2021.0.x -->
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
