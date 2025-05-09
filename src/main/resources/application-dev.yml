@@ -236,4 +236,4 @@ spring:
 #  type-aliases-package: org.goodday.mybatis.entity
 
 mybatis-plus:
-  mapper-locations: classpath:org/goodday/mybatis/mapper/*.xml
+  mapper-locations: classpath:/org/goodday/mybatis/mapper/*.xml

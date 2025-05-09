@@ -19,26 +19,6 @@
         <version>2.7.18</version>
     </parent>
     <dependencies>
-        <!--<dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.10</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>2.0.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.3.10</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>5.3.10</version>
-        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -58,11 +38,11 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>2.3</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-extension</artifactId>
             <version>3.5.12</version>
-        </dependency>
+        </dependency>-->
         <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-test</artifactId>
@@ -84,12 +64,6 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.33</version>
         </dependency>
-        <!-- HikariCP 数据源连接池 -->
-        <!--dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>5.0.1</version>
-        </dependency>-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -116,13 +90,6 @@
             <artifactId>shardingsphere-memory-mode-core</artifactId>
             <version>5.1.2</version>
         </dependency>
-        <!--&lt;!&ndash; MyBatis 测试模块 &ndash;&gt;
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter-test</artifactId>
-            <version>2.3.1</version> &lt;!&ndash; 与 mybatis 3.5.13 兼容 &ndash;&gt;
-            <scope>test</scope>
-        </dependency>-->
         <!-- Spring Boot 通用测试工具 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -164,11 +131,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-            <version>${spring.cloud.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
@@ -193,11 +155,6 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.7.0</version> <!-- 推荐最新 1.x 稳定版本 -->
         </dependency>
-        <!--<dependency>
-            <groupId>org.mybatis.dynamic-sql</groupId>
-            <artifactId>mybatis-dynamic-sql</artifactId>
-            <version>1.4.1</version> &lt;!&ndash; 建议使用与 MBG 1.4.1 兼容的版本 &ndash;&gt;
-        </dependency>-->
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -215,7 +172,7 @@
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.4.1</version>
+                <version>1.4.2</version>
                 <dependencies>
                     <dependency>
                         <groupId>mysql</groupId>
@@ -225,7 +182,7 @@
                 </dependencies>
                 <configuration>
                     <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
-                    <overwrite>true</overwrite>
+                    <overwrite>false</overwrite>
                 </configuration>
             </plugin>
         </plugins>
