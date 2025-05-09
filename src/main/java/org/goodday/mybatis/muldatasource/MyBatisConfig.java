@@ -1,15 +1,12 @@
 package org.goodday.mybatis.muldatasource;
 
-import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
-import javax.sql.DataSource;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PostConstruct;
 
 @Configuration
 @MapperScan(basePackages = "org.goodday.mybatis.mapper")
@@ -32,4 +29,19 @@ public class MyBatisConfig {
 //    }
 
     // mybatis plus不要手动
+
+
+    @Autowired
+    private SqlSessionFactory sqlSessionFactory;
+
+    @PostConstruct
+    public void printResultMaps() {
+        // 看看加载了多少个 resultMap
+        org.apache.ibatis.session.Configuration configuration = sqlSessionFactory.getConfiguration();
+        System.out.println("=== Loaded ResultMaps ===");
+        configuration.getResultMapNames().forEach(System.out::println);
+        // 看看加载了多少个 mapper
+        System.out.println("加载的 Mapper 映射语句数量: " + configuration.getMappedStatementNames().size());
+        configuration.getMappedStatementNames().forEach(System.out::println);
+    }
 }
