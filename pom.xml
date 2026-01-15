@@ -44,10 +44,10 @@
             <version>3.5.12</version>
         </dependency>-->
         <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <scope>test</scope>
-    </dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- ShardingSphere Starter -->
         <dependency>
         <groupId>org.apache.shardingsphere</groupId>
@@ -140,20 +140,38 @@
             <version>3.12.0</version> <!-- 或其他最新版本 -->
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.5.12</version>
-        </dependency>
-        <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>2.3.32</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.5.3</version>
         </dependency>
         <!-- SpringDoc OpenAPI 1.x for Spring Boot 2 -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.7.0</version> <!-- 推荐最新 1.x 稳定版本 -->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- 在 pom.xml 中添加 Oracle JDBC 驱动 -->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>21.5.0.0</version>
+        </dependency>
+
+        <!-- 或者根据您的 Java 版本选择 -->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc11</artifactId>
+            <version>21.5.0.0</version>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -172,7 +190,7 @@
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.4.2</version>
+                <version>1.4.1</version>
                 <dependencies>
                     <dependency>
                         <groupId>mysql</groupId>
@@ -183,6 +201,13 @@
                 <configuration>
                     <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
                     <overwrite>false</overwrite>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>org.goodday.mybatis.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>

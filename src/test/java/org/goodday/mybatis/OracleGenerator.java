@@ -1,26 +1,23 @@
 package org.goodday.mybatis;
 
-import com.baomidou.mybatisplus.generator.AutoGenerator;
+
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
-import com.baomidou.mybatisplus.generator.config.*;
-import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
-import com.baomidou.mybatisplus.generator.config.rules.DateType;
-import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class CodeGenerator {
+public class  OracleGenerator{
     public static void main(String[] args) {
-        String url = "jdbc:mysql://192.168.43.73:3306/insound?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+        // 只修改这里：MySQL URL 改为 Oracle URL
+        String url = "jdbc:oracle:thin:@//192.168.43.73:1521/insound";  // Oracle URL
+        // 或者：jdbc:oracle:thin:@192.168.43.73:1521:ORCL
         String username = "insound";
         String password = "123456";
 
-        // 多表生成
-        String[] tableNames = {"t_abroad_guar_flow", "t_accept_pvp_info", "t_accept_rever_info","t_loan_accounts_green"};
+        // 表名保持原样（如果Oracle中是小写表名）
+        String[] tableNames = {"DATA_QUALITY_RULES", "DD_CHECK_RULE"};
 
         String projectPath = System.getProperty("user.dir");
         System.out.println("项目路径: " + projectPath);
@@ -28,7 +25,7 @@ public class CodeGenerator {
         // 检查模板文件
         checkTemplates(projectPath);
 
-        // 手动删除旧文件确保重找到模板新生成
+        // 手动删除旧文件确保重新生成
         cleanOldFiles(projectPath, tableNames);
 
         // 生成TargetRepo
@@ -58,7 +55,7 @@ public class CodeGenerator {
                             .entity("targetrepo");
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude(tableNames)  // 改为数组
+                    builder.addInclude(tableNames)
                             .addTablePrefix("t_")
                             .entityBuilder()
                             .enableLombok()
@@ -85,7 +82,7 @@ public class CodeGenerator {
                             .entity("repository");
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude(tableNames)  // 改为数组
+                    builder.addInclude(tableNames)
                             .addTablePrefix("t_")
                             .entityBuilder()
                             .enableLombok()
@@ -112,7 +109,7 @@ public class CodeGenerator {
                             .entity("step");
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude(tableNames)  // 改为数组
+                    builder.addInclude(tableNames)
                             .addTablePrefix("t_")
                             .entityBuilder()
                             .enableLombok()
@@ -151,7 +148,6 @@ public class CodeGenerator {
     private static void generateMapperOnly(String url, String username, String password,
                                            String[] tableNames, String projectPath) {
 
-        // 直接使用 FastAutoGenerator.create()，它会自动识别数据库驱动
         FastAutoGenerator.create(url, username, password)
                 .globalConfig(builder -> {
                     builder.author("zhulw")

@@ -122,8 +122,8 @@
     <include refid="Table_Name"/>
     <include refid="PrimaryKey_Where"/>
 </delete>
-<!-- 简化 insertBatch -->
-<insert id="insertBatch">
+<!-- 优化 insertBatch：增加数据类型处理 -->
+<insert id="insertBatch" parameterType="java.util.List">
     INSERT INTO
     <include refid="Table_Name"/>
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -131,11 +131,33 @@
         ${field.columnName},
         </#list>
     </trim>
-    values
+    VALUES
     <#noparse><foreach collection="list" separator="," item="item"></#noparse>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <#list table.fields as field>
-            <#noparse>#{item.</#noparse>${field.propertyName}<#noparse>}</#noparse>,
+                <#assign javaType = field.propertyType>
+                <#assign fieldName = field.propertyName>
+                <#if javaType == "String">
+            <#noparse>#{item.</#noparse>${fieldName}<#noparse>, jdbcType=VARCHAR}</#noparse>,
+                <#elseif javaType == "Date" || javaType == "LocalDateTime" || javaType == "LocalDate" || javaType == "Timestamp">
+            <#noparse>#{item.</#noparse>${fieldName}<#noparse>, jdbcType=TIMESTAMP}</#noparse>,
+                <#elseif javaType == "BigDecimal">
+            <#noparse>#{item.</#noparse>${fieldName}<#noparse>, jdbcType=DECIMAL}</#noparse>,
+                <#elseif javaType == "Boolean">
+            <#noparse>#{item.</#noparse>${fieldName}<#noparse>, jdbcType=BOOLEAN}</#noparse>,
+                <#elseif javaType == "Integer">
+            <#noparse>#{item.</#noparse>${fieldName}<#noparse>, jdbcType=INTEGER}</#noparse>,
+                <#elseif javaType == "Long">
+            <#noparse>#{item.</#noparse>${fieldName}<#noparse>, jdbcType=BIGINT}</#noparse>,
+                <#elseif javaType == "Double">
+            <#noparse>#{item.</#noparse>${fieldName}<#noparse>, jdbcType=DOUBLE}</#noparse>,
+                <#elseif javaType == "Float">
+            <#noparse>#{item.</#noparse>${fieldName}<#noparse>, jdbcType=FLOAT}</#noparse>,
+                <#elseif javaType == "Byte[]" || javaType == "byte[]">
+            <#noparse>#{item.</#noparse>${fieldName}<#noparse>, jdbcType=BLOB}</#noparse>,
+                <#else>
+            <#noparse>#{item.</#noparse>${fieldName}<#noparse>}</#noparse>,
+                </#if>
             </#list>
         </trim>
     <#noparse></foreach></#noparse>

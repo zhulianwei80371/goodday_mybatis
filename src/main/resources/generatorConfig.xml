@@ -13,7 +13,7 @@
 
         <!-- 数据库连接信息 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.199.145:3306/insound"
+                        connectionURL="jdbc:mysql://192.168.1.67:3306/insound1"
                         userId="insound"
                         password="123456"/>
 
@@ -35,7 +35,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="t_target" domainObjectName="Target" enableCountByExample="true"
+        <table tableName="t_address" domainObjectName="Address" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"/>
     </context>
